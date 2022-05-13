@@ -6,11 +6,25 @@ function Cardholder(props) {
   function testMove(event) {
     console.log(event);
     console.log(event.target.previousElementSibling);
+    console.log(event.target.parentNode.parentNode);
+    console.log(event.target.parentNode.parentNode.scrollLeft);
+    console.log(event.target.parentNode.parentNode.scrollLeftMax);
+    console.log(event.target.clientWidth);
+    console.log(event.target.parentNode.parentNode.scrollLeft - window.innerWidth);
+    event.target.parentNode.parentNode.scrollLeft += window.innerWidth;
+  }
+
+  function moveLeft(event) {
+    event.target.parentNode.parentNode.scrollLeft -= window.innerWidth;
+  }
+
+  function moveRight(event) {
+    event.target.parentNode.parentNode.scrollLeft += window.innerWidth;
   }
 
   return (
     <div className="card-holder">
-      <div className="left-arrow"><p>LEFT</p></div>
+      <div className="left-arrow"><button onClick={moveLeft}>LEFT</button></div>
       <div className="carousel" data-id={Math.floor(Math.random() * 1000)}>
         <Card />
         <Card />
@@ -27,8 +41,7 @@ function Cardholder(props) {
         <Card />
         <Card />
       </div>
-      <div className="right-arrow"><p>RIGHT</p></div>
-      {/* <button onClick={testMove}>Click me</button> */}
+      <div className="right-arrow"><button onClick={moveRight}>RIGHT</button></div>
     </div>
   );
 }
